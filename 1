@@ -1,0 +1,21 @@
+import json
+
+with open("inventar.json", "r", encoding="utf-8") as fayl:
+    kitoblar = json.load(fayl)
+
+mavjud_kitoblar = []
+
+for kitob in kitoblar:
+    mavjud = kitob["jami"] - kitob["band"]
+
+    mavjud_kitoblar.append({
+        "nom": kitob["nom"],
+        "mavjud": mavjud
+    })
+
+    print(f'{kitob["nom"]}: {mavjud} ta mavjud')
+
+with open("mavjud_kitoblar.json", "w", encoding="utf-8") as fayl:
+    json.dump(mavjud_kitoblar, fayl, ensure_ascii=False, indent=4)
+
+print(f"{len(mavjud_kitoblar)} ta yozuv saqlandi.")
